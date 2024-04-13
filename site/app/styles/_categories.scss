@@ -205,7 +205,7 @@ $color-google-blue, 'wear-os.svg');
 @include codelab-card(['terraform'],
         $color-blue-grey, 'terraform.png');
 
-@include codelab-card(['tofu'],
+@include codelab-card(['opentofu'],
         $color-blue-grey, 'tofu.png');
 
 @include codelab-card(['unity'],

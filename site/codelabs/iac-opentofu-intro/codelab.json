@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2024-04-13T22:40:14+02:00",
+  "updated": "2024-04-13T23:05:26+02:00",
   "id": "iac-opentofu-intro",
   "duration": 0,
   "title": "Infrastructure-as-Code (1) - OpenTofu Introduction",
@@ -15,8 +15,7 @@
     "published"
   ],
   "category": [
-    "opentofu",
-    "exoscale"
+    "opentofu"
   ],
   "tags": [
     "fhb-inen",

@@ -1,6 +1,6 @@
 summary: OpenTofu Introduction (Exoscale SKS Edition)
 id: iac-opentofu-intro
-categories: OpenTofu, Exoscale
+categories: opentofu
 tags: fhb-inen, introduction, iac
 status: Published
 authors: Thomas Schuetz
