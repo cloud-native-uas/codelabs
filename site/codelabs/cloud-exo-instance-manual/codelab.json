@@ -1,0 +1,28 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-04-13T22:40:14+02:00",
+  "id": "cloud-exo-instance-manual",
+  "duration": 0,
+  "title": "Cloud Basics - Exoscale (1) - Running a virtual instance and first steps",
+  "authors": "Thomas Schuetz",
+  "summary": "Running a Virtual Instance (Exoscale Edition)",
+  "source": "codelabs/cloud-exo-instance-manual.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "linux",
+    "exoscale"
+  ],
+  "tags": [
+    "containers",
+    "exoscale",
+    "fhstp-nccs",
+    "introduction"
+  ],
+  "url": "cloud-exo-instance-manual"
+}

@@ -60,7 +60,7 @@ const BASE_URL = args.baseUrl || 'https://codelabs.cloud-native.at';
 // CODELABS_DIR is the directory where the actual codelabs exist on disk.
 // Despite being a constant, this can be overridden with the --codelabs-dir
 // flag.
-const CODELABS_DIR = args.codelabsDir || '.';
+const CODELABS_DIR = args.codelabsDir || 'codelabs';
 
 // CODELABS_ENVIRONMENT is the environment for which to build codelabs.
 const CODELABS_ENVIRONMENT = args.codelabsEnv || 'web';
