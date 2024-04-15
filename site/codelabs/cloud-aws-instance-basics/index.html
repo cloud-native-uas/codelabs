@@ -1,0 +1,237 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Linux Basics on AWS</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14" ga4id=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  codelab-ga4id=""
+                  id="cloud-aws-instance-basics"
+                  title="Linux Basics on AWS"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="What You&#39;ll Learn" duration="0">
+        <p>In this lab, you will:</p>
+<ul>
+<li>Create a Virtual Machine on AWS</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Set up an AWS Instance" duration="5">
+        <ul>
+<li>Open the AWS Console</li>
+<li>Search for EC2</li>
+<li>Click on Launch a Virtual Machine</li>
+<li><ul>
+<li>Machine Name: MyFirstMachine</li>
+<li>OS Image: Amazon Linux (2023)</li>
+<li>Instance Type: t2.micro</li>
+<li>Key Pair: Create a new key pair</li>
+<li>Tags: <ul>
+<li>Name: my-first-instance</li>
+</ul>
+</li>
+<li>Launch instance</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Linux and Bash" duration="0">
+        <p>Linux is an open-source operating system modeled on UNIX. Being open-source, the source code of Linux is freely available to its users. Its users can change its code to fix bugs or add improved features.</p>
+<p>Key concepts:</p>
+<ul>
+<li><strong>Kernel</strong>: The core part of the system that handles the CPU, memory, and peripheral devices. The Linux kernel is the interface between your software and your hardware.</li>
+<li><strong>Shell</strong>: The shell is the utility that processes your requests. When you type in a command at your terminal, the shell interprets the command and calls the program that you want.</li>
+<li><strong>Terminal</strong>: The terminal is a command line interface where you can type and execute text based commands.</li>
+</ul>
+<p>Bash (Bourne Again SHell) is a shell program. It&#39;s widely available on various types of Unix-like operating systems, including Linux. Bash is almost synonymous with the shell; in fact, many people use the term &#34;shell&#34; to refer to Bash.</p>
+<p>Key concepts:</p>
+<ul>
+<li><strong>Commands</strong>: These are functions that you can run directly from the terminal. Some basic commands include <code>ls</code> (list directory contents), <code>cd</code> (change the current directory), <code>pwd</code> (print name of current directory), and <code>exit</code> (exit the shell).</li>
+<li><strong>Scripts</strong>: A bash script is a file containing a list of commands to be executed by the bash shell. You can automate repetitive tasks using bash scripts.</li>
+<li><strong>Variables</strong>: You can store data in variables to be used later in your scripts. You can also use special predefined variables to access specific system properties.</li>
+<li><strong>Control Structures</strong>: Bash provides a variety of control structures for directing the flow of execution, including <code>if</code>/<code>else</code> statements, <code>for</code> loops, and <code>while</code> loops.</li>
+</ul>
+<p>Remember, the best way to learn Linux and Bash is by practicing. Try to use the terminal for as many tasks as possible and write scripts to automate tasks. This will help you become familiar with the command line and improve your efficiency.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Our first steps" duration="0">
+        <ul>
+<li>In the instance screen, click on the check mark besides the newly created instance. Afterward, click on the &#34;Connect&#34; button. This will show you how to connect to your instance. Choose &#34;Connect using EC2 Instance Connect&#34;.</li>
+<li>A shell window will appear</li>
+</ul>
+<p>In Linux &#34;everything is a file&#34;. Therefore, it makes sense to make yourself a bit familiar with some file operations.</p>
+<p>Let&#39;s create our first directory:</p>
+<pre><code language="language-bash" class="language-bash">mkdir ~/my-first-directory
+</code></pre>
+<p>The tilde means that you will create this directory underneath your home directory. Alternatively you could also type in mkdir <code>/home/ec2-user/my-first-directory</code>.</p>
+<p>Now let&#39;s change into this directory:</p>
+<pre><code language="language-bash" class="language-bash">cd ~/my-first-directory
+</code></pre>
+<p>You can check your current directory with the <code>pwd</code> command. This will print the current directory to the terminal.</p>
+<p>Now let&#39;s create a file:</p>
+<pre><code language="language-bash" class="language-bash">touch my-first-file.txt
+</code></pre>
+<p>The <code>touch</code> command will simply create an empty file. As we want to put some contents into the file, we can use the <code>echo</code> command:</p>
+<pre><code language="language-bash" class="language-bash">echo &#34;Hello World&#34; &gt; my-first-file.txt
+</code></pre>
+<p>If the file wouldn&#39;t already exist, this would create it.</p>
+<p>Now let&#39;s print the contents of the file to the terminal:</p>
+<pre><code language="language-bash" class="language-bash">cat my-first-file.txt
+</code></pre>
+<p>The cat command will print the contents of the file to the terminal. If you want to change the contents, you can use an editor, such as nano.</p>
+<pre><code>nano my-first-file.txt
+</code></pre>
+<p>This will open the nano editor and you can change the contents of the file. The detailed commands for nano are shown at the bottom of the terminal.</p>
+<h2 is-upgraded>Your first steps in Linux</h2>
+<ul>
+<li>Create a directory under <code>/tmp</code></li>
+<li>Create a file in this directory</li>
+<li>Write some text into the file</li>
+</ul>
+<h2 is-upgraded>Summary</h2>
+<p>In this task, you have learned very basic Linux commands and how to create a file and directory. This is the first step to becoming familiar with the Linux operating system.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Scripting" duration="0">
+        <p>One of the most powerful features of Linux (and bash) is the ability to automate tasks using scripts. A script is a file containing a list of commands that can be executed by the shell. This allows you to automate repetitive tasks and save time.</p>
+<p>Let&#39;s create a simple script that prints &#34;Hello, World!&#34; to the terminal.</p>
+<p>Therefore, create a file called <code>hello.sh</code>:</p>
+<pre><code language="language-bash" class="language-bash">nano hello.sh
+</code></pre>
+<p>Now, add the following content to the file:</p>
+<pre><code language="language-bash" class="language-bash">#!/bin/bash
+echo &#34;Hello, World!&#34;
+</code></pre>
+<p>Save the file and exit the editor.</p>
+<p><strong>File permissions in Linux</strong> In Linux, every file and directory has a set of permissions associated with it. These permissions determine who can read, write, and execute the file or directory.  Permissions are divided into three groups:</p>
+<p><em>User:</em> The owner of the file. The user can have read, write, or execute permissions.</p>
+<p><em>Group:</em> The group that owns the file. Users who are part of this group can have read, write, or execute permissions.</p>
+<p><em>Other:</em> All other users who are not the owner or part of the group. They can also have read, write, or execute permissions.</p>
+<p>Each permission is represented by a letter:</p>
+<p><em>Read (r):</em> The file can be opened and its content viewed.<br><em>Write (w):</em> The file can be modified or deleted.<br><em>Execute (x):</em> The file can be run as a program.<br> You can view the permissions of a file or directory using the ls -l command in the terminal. The permissions will be displayed in the form of a string, such as -rwxr-xr–. This string can be broken down as follows:<br> The first character indicates the type of file. A - indicates a regular file, while a d indicates a directory. The next three characters represent the user permissions (in this case, rwx means the user can read, write, and execute). The following three characters represent the group permissions (here, r-x means the group can read and execute, but not write). The final three characters represent the permissions for others (in this case, r– means others can only read). You can change the permissions of a file or directory using the chmod command followed by the permission set you want to apply, and the name of the file or directory. For example, chmod 755 filename would give the user full permissions, and read and execute permissions to the group and others.</p>
+<p>In our case, we want to make the script executable. Therefore, we have to change the permissions of the file:</p>
+<pre><code language="language-bash" class="language-bash">chmod +x hello.sh
+</code></pre>
+<p>Now you can run the script:</p>
+<pre><code language="language-bash" class="language-bash">./hello.sh
+</code></pre>
+<p>This will print &#34;Hello, World!&#34; to the terminal.</p>
+<p>This was the first step in scripting. You can now create more complex scripts to automate tasks and improve your efficiency.</p>
+<p>Now, let&#39;s create a script that prints &#34;Hello, &#123;&#123;country-name}}&#34; to the terminal. Therefore, create a file called <code>hello-country.sh</code>:</p>
+<pre><code language="language-bash" class="language-bash">#!/bin/bash
+
+countries=(&#34;Austria&#34; &#34;Germany&#34; &#34;Switzerland&#34; &#34;Italy&#34; &#34;France&#34;)
+
+for country in &#34;${countries[@]}&#34;; do
+  echo &#34;Hello, $country!&#34;
+done
+</code></pre>
+<p>Save the file and exit the editor.</p>
+<p>Now, make the script executable:</p>
+<pre><code language="language-bash" class="language-bash">chmod +x hello-country.sh
+</code></pre>
+<p>After running this script, you should get greetings to different countries in your shell.</p>
+<h2 is-upgraded>A new task</h2>
+<p>Create a script that prints &#34;Hello, &#123;&#123;different names}}&#34; to the terminal. Your name should be part of it and when your name is printed, add &#34;This is me!&#34; to the output. Therefore you will have to use an if statement which might look like this:</p>
+<pre><code language="language-bash" class="language-bash">if [ conditional == &#34;Thomas&#34; ]; then
+  echo &#34;output, This is me!
+else
+  echo &#34;output&#34;
+fi
+</code></pre>
+<h2 is-upgraded>Summary</h2>
+<p>In this task, you have learned how to create a simple script and how to make it executable. You have also learned how to use a for loop to iterate over an array and print the elements to the terminal. This is the first step in scripting and automation.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Running a simple webserver" duration="0">
+        <p>In this task, we will install a simple webserver on our virtual machine. We will use the <code>httpd</code> package, which is the Apache webserver.</p>
+<p><strong>Packages in Linux</strong> In Linux, a package is a compressed file archive that contains all of the files that come with a particular application. The files are usually stored in a specific directory hierarchy that the application expects. A package also contains metadata, such as the software&#39;s name, description of its purpose, version number, vendor, checksum, and a list of dependencies necessary for the software to run properly.  Packages in Linux come in different formats depending on the distribution. For example, Debian-based distributions (like Ubuntu) use .deb files, while Red Hat-based distributions (like Fedora) use .rpm files.  Package management systems, such as APT (for Debian-based systems) or YUM (for Red Hat-based systems), are used to install, upgrade, or remove software packages in Linux. These tools handle dependencies and will automatically download and install any required packages for a software package.  For example, to install a package on a Debian-based system, you would use the apt-get install command followed by the package name. On a Red Hat-based system, you would use the yum install command.  In addition to these standard package management systems, many languages have their own package managers, such as npm for Node.js, pip for Python, and gem for Ruby.  Remember, it&#39;s important to keep your system and packages up-to-date to ensure you have the latest features and security updates.</p>
+<p>Let&#39;s try to find out, if the <code>httpd</code> package exists:</p>
+<pre><code language="language-bash" class="language-bash">yum search httpd
+</code></pre>
+<p>As we see, the package is available. Let&#39;s install it:</p>
+<pre><code language="language-bash" class="language-bash">sudo yum install httpd -y
+</code></pre>
+<p>We need sudo in this case, as we are installing software on the system and this can only be achieved using superuser permissions (sudo). The <code>-y</code> flag will automatically answer &#34;yes&#34; to all questions.</p>
+<p>Now, let&#39;s start the webserver:</p>
+<pre><code language="language-bash" class="language-bash">sudo service httpd start
+</code></pre>
+<p>You can check if the webserver is running by opening a browser and typing in the public IP address of your instance (. You should see the default Apache page.</p>
+<p>Using <code>curl localhost</code> you can also check if the webserver is running.</p>
+<h2 is-upgraded>Add a new website to the webserver</h2>
+<p>Simply create a new file in the directory `/var/www/html/index.html and add your content. Afterward, try to curl the content from the webserver.</p>
+<h2 is-upgraded>Summary</h2>
+<p>You created a simple webserver using the Apache webserver package. You learned how to install a package using the package manager and how to start a service. You also learned how to check if the service is running and how to access it using a browser.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Making your server accessible" duration="0">
+        <p>In this task, we will make our server accessible from the public internet. Therefore, we have to open the port 80 in the security group of our instance.</p>
+<ul>
+<li>Open the AWS Console</li>
+<li>Search for EC2</li>
+<li>Find the instance you created</li>
+<li>Click on the Security Group Tab</li>
+<li>Click on the Security Group</li>
+<li>Click Inbound Rules</li>
+<li>Add a new rule <ul>
+<li>Type: HTTP</li>
+<li>Source: 0.0.0.0/0</li>
+<li>Port: 80</li>
+</ul>
+</li>
+<li>Save the rule</li>
+</ul>
+<p>Now you should be able to access the Webserver</p>
+<h2 is-upgraded>Putting it all together</h2>
+<ul>
+<li>Delete the instance</li>
+<li>Create a new instance</li>
+<li>Install a webserver (maybe nginx)</li>
+<li>Add your own content to the webserver</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

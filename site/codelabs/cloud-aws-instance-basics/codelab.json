@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-04-15T14:59:31+02:00",
+  "id": "cloud-aws-instance-basics",
+  "duration": 5,
+  "title": "Linux Basics on AWS",
+  "authors": "Thomas Schuetz",
+  "summary": "Linux Basics on AWS",
+  "source": "codelabs/cloud-aws-instance-basics.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "linux",
+    "aws"
+  ],
+  "tags": [
+    "exoscale",
+    "fhstp-nccs",
+    "introduction"
+  ],
+  "url": "cloud-aws-instance-basics"
+}
