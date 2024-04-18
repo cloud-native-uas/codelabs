@@ -184,6 +184,9 @@ $color-google-blue, 'wear-os.svg');
 @include codelab-card(['icinga'],
   $color-ar-core-purple, 'icinga.png');
 
+@include codelab-card(['kubernetes'],
+        $color-blue-grey, 'kubernetes.png');
+
 @include codelab-card(['linux'],
         $color-google-green, 'linux-tux.svg');
 
@@ -205,7 +208,7 @@ $color-google-blue, 'wear-os.svg');
 @include codelab-card(['terraform'],
         $color-blue-grey, 'terraform.png');
 
-@include codelab-card(['open  tofu'],
+@include codelab-card(['opentofu'],
         $color-blue-grey, 'tofu.png');
 
 @include codelab-card(['unity'],

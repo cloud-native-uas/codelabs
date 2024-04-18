@@ -1,0 +1,11 @@
+{
+  "title": "FHB - MCCE - Infrastructure Engineering",
+  "description": "This course offers an in-depth look at advanced Cloud Native Infrastructure Engineering practices, with a focus on GitOps, Infrastructure as Code (IaC), and security measures such as image scanning and policy controllers. ",
+  "logoUrl": "/logos/fhb-logo.png",
+  "tags": ["fhb-inen"],
+  "exclude": [
+    ".*-about$",
+    "^lang-.*"
+  ],
+  "hidden": true
+}
