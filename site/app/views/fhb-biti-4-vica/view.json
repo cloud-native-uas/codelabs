@@ -1,0 +1,11 @@
+{
+  "title": "FHB - BITI - Virtualization and Cloud Computing",
+  "description": "FHB - BITI - Virtualization and Cloud Computing",
+  "logoUrl": "/logos/fhb-logo.png",
+  "tags": ["fhb-vica"],
+  "exclude": [
+    ".*-about$",
+    "^lang-.*"
+  ],
+  "hidden": true
+}

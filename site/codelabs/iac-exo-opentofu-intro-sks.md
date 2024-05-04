@@ -11,7 +11,7 @@ authors: Thomas Schuetz
 
 ## What You’ll Learn
 
-![Big Picture](./img/iac-exo-opentofu-intro/big-picture.png)
+![Big Picture](img/iac-exo-opentofu-intro-sks/big-picture.png)
 
 In this lab, you will:
 
