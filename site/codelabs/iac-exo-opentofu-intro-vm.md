@@ -1,11 +1,11 @@
-summary: Lab 1 - OpenTofu Introduction (Exoscale VMs Edition)
+summary: OpenTofu Introduction (Exoscale VM Edition)
 id: iac-opentofu-intro-vm
 categories: opentofu
 tags: fhb-vica
 status: Published
 authors: Thomas Schuetz
 
-# Infrastructure-as-Code - Lab 1 - OpenTofu Introduction
+# Infrastructure-as-Code - OpenTofu Introduction (Exoscale VM Edition)
 
 <!-- ------------------------ -->
 
