@@ -10,7 +10,9 @@ authors: Thomas Schuetz
 ## Introduction
 In this lab, we will install some services on an AWS Virtual Instance and configure a VPN connection these two instances in different AWS accounts. It is recommended to use two different AWS accounts for this lab to simulate a real-world scenario. Ideally, this lab should be done in a group of two people.
 
-## Prerequisites
+### Big Picture
+![Big Picture](img/cloud-aws-vpn-services/big-picture.png)
+### Prerequisites
 - Two AWS accounts
 - Two AWS Virtual Instances
 - Basic knowledge of AWS
