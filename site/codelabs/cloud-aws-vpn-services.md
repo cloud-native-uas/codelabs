@@ -187,7 +187,7 @@ sudo nano /etc/wireguard/wg0.conf
 
 Add the following configuration to the file:
 
-## Virtual Instance 1
+### Virtual Instance 1
 
 ```bash
 [Interface]
@@ -201,7 +201,7 @@ AllowedIPs = 10.0.0.2/32
 Endpoint = <Public IP of Peer 2>:51820
 ```
 
-## Virtual Instance 2
+### Virtual Instance 2
 ```
 [Interface]
 PrivateKey = <Private Key of Your Machine>
@@ -261,7 +261,7 @@ curl my-very-fancy-website.com
 
 On the other Virtual Instance, you can validate the configuration by running curl with the name of the other server on the Virtual Instance.
 
-## DNS Configuration
+## Step 6: DNS Configuration
 At this point, you have a working VPN connection between two Virtual Instances in different AWS accounts and configured the name resolution to access the website through the VPN connection. However, the configuration is not very flexible because you need to update the /etc/hosts file on both Virtual Instances whenever the IP address of the Virtual Instance changes.
 
 To make the configuration more flexible, you can use a DNS server to resolve the domain name to the IP address of the Virtual Instance. In this case, we will use [BIND](https://bind.isc.org), a flexible and extensible DNS server.
