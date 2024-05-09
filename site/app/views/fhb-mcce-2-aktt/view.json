@@ -1,0 +1,11 @@
+{
+  "title": "FHB - MCCE - Current Trends (Platform Engineering)",
+  "description": "This course offers an in-depth look at advanced Cloud Native Platform Engineering practices, with a focus on Developer Portals, Infrastructure and Service Templates and the use of the Service Catalog.",
+  "logoUrl": "/logos/fhb-logo.png",
+  "tags": ["fhb-pe"],
+  "exclude": [
+    ".*-about$",
+    "^lang-.*"
+  ],
+  "hidden": true
+}
