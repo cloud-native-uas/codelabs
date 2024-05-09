@@ -1,7 +1,7 @@
 summary: Manage GitHub Resources with Crossplane
 id: iac-crossplane-github
 categories: Kubernetes, Crossplane
-tags: introduction, fhb-pe
+tags: advanced, fhb-pe
 status: Published
 authors: Thomas Schuetz
 
