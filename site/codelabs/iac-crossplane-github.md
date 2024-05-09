@@ -1,16 +1,14 @@
-summary: Instantiate a Crossplane managed K8s cluster on Exoscale
-id: cloud-aws-vpn-services
-categories: Kubernetes, Crossplane, Exoscale
+summary: Manage GitHub Resources with Crossplane
+id: iac-crossplane-github
+categories: Kubernetes, Crossplane
 tags: introduction, fhb-pe
 status: Published
 authors: Thomas Schuetz
 
-# Create GitHub Repositories with Crossplane
+# Manage GitHub Resources with Crossplane
 
 ## Introduction
 In this lab, we will demonstrate how to provision GitHub repositories using Crossplane. Crossplane is an open-source Kubernetes add-on that enables you to manage cloud resources using Kubernetes. It extends the Kubernetes API to allow you to create, configure, and manage cloud resources using Kubernetes manifests. Crossplane is a CNCF sandbox project and is part of the Cloud Native Computing Foundation.
-
-### Big Picture
 
 ### Prerequisites
 - A Kubernetes Cluster
@@ -19,7 +17,10 @@ In this lab, we will demonstrate how to provision GitHub repositories using Cros
 - Bash/Zsh shell (WSL is also possible)
 
 ### Objectives
-- Install a Crossplane managed GitHub Repository on Exoscale
+- Install Crossplane
+- Install the GitHub Provider
+- Create a GitHub Repository with Crossplane
+
 
 ## Step 1: Verify the Kubernetes Cluster
 If you have not installed a Kubernetes Cluster yet, you can follow the instructions in the [Create a Kubernetes Cluster with IaC](./iac-exo-k8s-cluster) lab.
@@ -51,10 +52,10 @@ kubectl get pods -n crossplane-system
 
 If you see the pods of Crossplane, you have successfully installed Crossplane.
 
-## Step 3: Install the Exoscale Provider
+## Step 3: Install the GitHub Provider
 Crossplane Providers are extensions to Crossplane that enable it to manage a new kind of resource in an external system. They are essentially plugins that are installed into a Crossplane cluster to add new functionality. For example, a provider could add support for managing databases in a specific cloud provider, or it could add support for managing DNS records in a DNS system. Each provider brings along a set of Custom Resource Definitions (CRDs) that define the resources it can manage. Once a provider is installed, users can create instances of these CRDs to provision and manage resources in the external system.
 
-As we want to manage resources in Exoscale, we need to install the Exoscale Provider.
+As we want to manage resources in GitHub, we need to install the GitHub Provider.
 
 To install the GitHub Provider, you have to create the following YAML file and apply it to the Kubernetes Cluster (as described [here](https://marketplace.upbound.io/providers/coopnorge/provider-github/v0.10.0)):
 
@@ -111,7 +112,7 @@ spec:
 After you have created the file, you can apply it to the Kubernetes Cluster by running the following command:
 
 ```bash
-kubectl apply -f &lt;filename&gt;
+kubectl apply -f <<filename>>;
 ```
 
 ## Step 4: Create a GitHub Repository with Crossplane
@@ -166,7 +167,7 @@ spec:
 After you have created the file, you can apply it to the Kubernetes Cluster by running the following command:
 
 ```bash
-kubectl apply -f &lt;filename&gt;
+kubectl apply -f <<filename>>;
 ```
 
 ### Verify the GitHub Repository
