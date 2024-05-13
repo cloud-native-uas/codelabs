@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-05-09T18:27:59+02:00",
+  "id": "iac-crossplane-github",
+  "duration": 0,
+  "title": "Manage GitHub Resources with Crossplane",
+  "authors": "Thomas Schuetz",
+  "summary": "Manage GitHub Resources with Crossplane",
+  "source": "codelabs/iac-crossplane-github.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "kubernetes",
+    "crossplane"
+  ],
+  "tags": [
+    "advanced",
+    "fhb-pe"
+  ],
+  "url": "iac-crossplane-github"
+}

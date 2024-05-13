@@ -1,0 +1,194 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Manage GitHub Resources with Crossplane</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14" ga4id=""></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  codelab-ga4id=""
+                  id="iac-crossplane-github"
+                  title="Manage GitHub Resources with Crossplane"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p>In this lab, we will demonstrate how to provision GitHub repositories using Crossplane. Crossplane is an open-source Kubernetes add-on that enables you to manage cloud resources using Kubernetes. It extends the Kubernetes API to allow you to create, configure, and manage cloud resources using Kubernetes manifests. Crossplane is a CNCF sandbox project and is part of the Cloud Native Computing Foundation.</p>
+<h2 is-upgraded>Prerequisites</h2>
+<ul>
+<li>A Kubernetes Cluster</li>
+<li>Solid understanding of the Kubernetes basics</li>
+<li>Shell access to the Kubernetes Cluster</li>
+<li>Bash/Zsh shell (WSL is also possible)</li>
+</ul>
+<h2 is-upgraded>Objectives</h2>
+<ul>
+<li>Install Crossplane</li>
+<li>Install the GitHub Provider</li>
+<li>Create a GitHub Repository with Crossplane</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 1: Verify the Kubernetes Cluster" duration="0">
+        <p>If you have not installed a Kubernetes Cluster yet, you can follow the instructions in the <a href="./iac-exo-k8s-cluster" target="_blank">Create a Kubernetes Cluster with IaC</a> lab.</p>
+<p>After you have successfully installed the Kubernetes Cluster, you can verify the installation by running the following command:</p>
+<pre><code language="language-bash" class="language-bash">kubectl get nodes
+</code></pre>
+<p>If you see the nodes of the cluster, you have successfully installed the Kubernetes Cluster.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 2: Install Crossplane" duration="0">
+        <p>If you haven&#39;t installed Helm yet, please install it by following the instructions in the Helm documentation (https://helm.sh/docs/intro/install/).</p>
+<p>To install Crossplane, you can use the following Helm command:</p>
+<pre><code language="language-bash" class="language-bash">helm repo add crossplane-stable https://charts.crossplane.io/stable
+helm repo update
+helm install crossplane --namespace crossplane-system crossplane-stable/crossplane --create-namespace --wait
+</code></pre>
+<p>After the installation, you can verify the installation by running the following command:</p>
+<pre><code language="language-bash" class="language-bash">kubectl get pods -n crossplane-system
+</code></pre>
+<p>If you see the pods of Crossplane, you have successfully installed Crossplane.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 3: Install the GitHub Provider" duration="0">
+        <p>Crossplane Providers are extensions to Crossplane that enable it to manage a new kind of resource in an external system. They are essentially plugins that are installed into a Crossplane cluster to add new functionality. For example, a provider could add support for managing databases in a specific cloud provider, or it could add support for managing DNS records in a DNS system. Each provider brings along a set of Custom Resource Definitions (CRDs) that define the resources it can manage. Once a provider is installed, users can create instances of these CRDs to provision and manage resources in the external system.</p>
+<p>As we want to manage resources in GitHub, we need to install the GitHub Provider.</p>
+<p>To install the GitHub Provider, you have to create the following YAML file and apply it to the Kubernetes Cluster (as described <a href="https://marketplace.upbound.io/providers/coopnorge/provider-github/v0.10.0" target="_blank">here</a>):</p>
+<pre><code language="language-yaml" class="language-yaml">apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+   name: provider-github
+spec:
+   package: xpkg.upbound.io/coopnorge/provider-github:v0.10.0
+</code></pre>
+<p>After you have created the file, you can apply it to the Kubernetes Cluster by running the following command:</p>
+<pre><code language="language-bash" class="language-bash">kubectl apply -f &amp;lt;filename&amp;gt;
+</code></pre>
+<p>You should see the provider being installed by running the following command:</p>
+<pre><code language="language-bash" class="language-bash">kubectl get providers.pkg.crossplane.io
+</code></pre>
+<p>To create resources in GitHub, you need to create a secret with your GitHub credentials. Therefore, you have to obtain a GitHub Personal Access Token. You can create a new token by accessing GitHub and going to Settings -&gt; Developer settings -&gt; Personal access tokens -&gt; Generate new token. Make sure to select the <code>repo</code> scope.</p>
+<p>After you have obtained the token, you can create a secret by creating the following YAML file and applying it to the Kubernetes Cluster (<a href="https://github.com/coopnorge/provider-github/blob/main/README.md" target="_blank">docs</a>).</p>
+<pre><code language="language-yaml" class="language-yaml">---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: provider-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  credentials: &#34;{\&#34;token\&#34;:\&#34;${GH_TOKEN}\&#34;,\&#34;owner\&#34;:\&#34;${GH_OWNER}\&#34;}&#34;
+
+---
+apiVersion: github.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      name: provider-secret
+      namespace: crossplane-system
+      key: credentials
+</code></pre>
+<p>After you have created the file, you can apply it to the Kubernetes Cluster by running the following command:</p>
+<pre><code language="language-bash" class="language-bash">kubectl apply -f &lt;&lt;filename&gt;&gt;;
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Step 4: Create a GitHub Repository with Crossplane" duration="0">
+        <p>To create a GitHub Repository, you can create the following YAML file and apply it to the Kubernetes Cluster:</p>
+<pre><code language="language-yaml" class="language-yaml">---
+apiVersion: repo.github.upbound.io/v1alpha1
+kind: Repository
+metadata:
+  name: my-crossplane-repo
+spec:
+  providerConfigRef:
+    name: default
+  forProvider:
+    name: my-crossplane-repo
+    autoInit: true
+    visibility: private
+---
+apiVersion: repo.github.upbound.io/v1alpha1
+kind: Branch
+metadata:
+  name: add-file-branch
+spec:
+  forProvider:
+    repositoryRef:
+      name: my-crossplane-repo
+    branch: add-file-branch
+  providerConfigRef:
+    name: default
+---
+apiVersion: repo.github.upbound.io/v1alpha1
+kind: RepositoryFile
+metadata:
+  name: sample-file-dot-txt
+spec:
+  forProvider:
+    file: sample-file.txt
+    content: |
+      I am an crossplane
+      provider. This should be nice.
+    commitMessage: &#34;managed by crossplane provider&#34;
+    commitAuthor: &#34;Crossplane Github Provider&#34;
+    commitEmail: &#34;github-provider@crossplane.com&#34;
+    branch: add-file-branch
+    repositoryRef:
+      name: my-crossplane-repo
+  providerConfigRef:
+    name: default
+</code></pre>
+<p>After you have created the file, you can apply it to the Kubernetes Cluster by running the following command:</p>
+<pre><code language="language-bash" class="language-bash">kubectl apply -f &lt;&lt;filename&gt;&gt;;
+</code></pre>
+<h2 is-upgraded>Verify the GitHub Repository</h2>
+<p>To verify the GitHub Repository, you can access GitHub and check if the repository has been created and there is a file in there.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Conclusion" duration="0">
+        <p>In this lab, we have demonstrated how to provision GitHub repositories using Crossplane. Crossplane is a powerful tool that allows you to manage cloud resources using Kubernetes. It extends the Kubernetes API to allow you to create, configure, and manage cloud resources using Kubernetes manifests.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

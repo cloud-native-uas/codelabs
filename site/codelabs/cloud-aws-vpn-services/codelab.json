@@ -1,0 +1,26 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-05-05T14:02:24+02:00",
+  "id": "cloud-aws-vpn-services",
+  "duration": 0,
+  "title": "Cloud VPN Playground",
+  "authors": "Thomas Schuetz",
+  "summary": "Cloud VPN Playground",
+  "source": "codelabs/cloud-aws-vpn-services.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "linux",
+    "aws"
+  ],
+  "tags": [
+    "fhstp-nccs",
+    "introduction"
+  ],
+  "url": "cloud-aws-vpn-services"
+}
