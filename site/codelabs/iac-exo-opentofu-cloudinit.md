@@ -1,11 +1,11 @@
-summary: Lab 2 - Installing a Microservice Application with Terraform (Exoscale Edition)
-  id: iac-terraform-exo-cloudinit
-categories: terraform
-tags: introduction, iac
+summary: Lab 2 - Installing a Microservice Application with OpenTofu (Exoscale Edition)
+  id: iac-opentofu-exo-cloudinit
+categories: opentofu
+tags: fhb-vica, iac
 status: Published
 authors: Thomas Schuetz
 
-# Infrastructure-as-Code - Lab 2 - Installing a Microservice Application with Terraform (Exoscale Edition)
+# Infrastructure-as-Code (2) - Installing a Microservice Application with OpenTofu (Exoscale Edition)
 <!-- ------------------------ -->
 
 ## What You’ll Learn

@@ -263,11 +263,11 @@ and provision the same virtual machine as before using OpenTofu
   Instead, use mechanisms supported by the provider (e.g. Environment Variables)**
 
 ```OpenTofu
-OpenTofu {
+terraform {
   required_providers {
     exoscale = {
       source  = "exoscale/exoscale"
-      version = "0.48.0"
+      version = "0.59.0"
     }
   }
 }
@@ -281,7 +281,7 @@ provider "exoscale" {
 - This should be enough to run our first OpenTofu command
 
 ```
-OpenTofu init
+tofu init
 ```
 
 - This leads to the following output
@@ -325,24 +325,37 @@ In the second step, we will try to create a virtual instance ...
 To do so, we'll create a second file called `main.tf`. Furthermore, we copy the following configuration in this file. Replace
 the ssh_key with the name of the one you created before:
 
-```OpenTofu
-data "exoscale_compute_template" "my_template" {
+```terraform
+terraform {
+  required_providers {
+    exoscale = {
+      source  = "exoscale/exoscale"
+      version = "0.59.0"
+    }
+  }
+}
+
+provider "exoscale" {
+  key = var.access_key
+  secret = var.secret_key
+}
+
+data "exoscale_template" "my_template" {
   zone = "at-vie-1"
   name = "Linux Ubuntu 22.04 LTS 64-bit"
 }
 
 data "exoscale_security_group" "public" {
-  name = "<your-security-group-name>"
+  name = "ssh"
 }
 
 resource "exoscale_compute_instance" "my_instance" {
   zone = "at-vie-1"
   name = "my-instance"
 
-  template_id = data.exoscale_compute_template.my_template.id
+  template_id = data.exoscale_template.my_template.id
   type        = "standard.medium"
   disk_size   = 10
-  ssh_key = "<your-ssh-key-name>"
   security_group_ids = [ data.exoscale_security_group.public.id ]
 }
 ```
@@ -377,7 +390,7 @@ OpenTofu apply
 
 ```
 
-❯ OpenTofu apply
+❯ tofu apply
 data.exoscale_security_group.public: Reading...
 data.exoscale_compute_template.my_template: Reading...
 data.exoscale_security_group.public: Read complete after 1s [id=8b225a34-9e8e-4583-a604-a64f61e9c4b9]
@@ -441,7 +454,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 - You can simply tear it down by typing
 
 ```
-OpenTofu destroy
+tofu destroy
 ```
 
 - The tool will ask you if you are sure that you want to remove your instance
