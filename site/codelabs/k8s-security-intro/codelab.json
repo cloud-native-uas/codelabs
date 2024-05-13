@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-04-18T21:03:32+02:00",
+  "id": "k8s-security-intro",
+  "duration": 0,
+  "title": "Kubernetes - Security Lab",
+  "authors": "Thomas Schuetz",
+  "summary": "Kubernetes Security Intro",
+  "source": "codelabs/kubernetes-security-intro.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "kubernetes"
+  ],
+  "tags": [
+    "containers",
+    "fhb-inen",
+    "introduction",
+    "kubernetes"
+  ],
+  "url": "k8s-security-intro"
+}

@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-04-18T21:03:33+02:00",
+  "id": "iac-opentofu-gitops",
+  "duration": 0,
+  "title": "Combining OpenTofu and GitOps (Exoscale SKS Edition)",
+  "authors": "Thomas Schuetz",
+  "summary": "Combining OpenTofu and GitOps (Exoscale SKS Edition)",
+  "source": "codelabs/iac-exo-opentofu-gitops.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "opentofu"
+  ],
+  "tags": [
+    "fhb-inen",
+    "iac",
+    "introduction",
+    "mcce"
+  ],
+  "url": "iac-opentofu-gitops"
+}

@@ -206,7 +206,7 @@ Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
 
 ```
 <aside class="positive">
-You created 4 instances using terraform, congratulations! 
+You created 2 instances using terraform, congratulations! 
 </aside>
 
 ### Inspect our environment
@@ -214,7 +214,7 @@ You created 4 instances using terraform, congratulations!
 * Switch to Compute -> Instances
 
 * You should see the following instances:
-* ![Big Picture](./img/mcce-virt-terra-exo-cloud-init-instances.png)
+* ![Big Picture](./img/iac-exo-opentofu-cloudinit/instances.png)
 * Edit: You should only see two instances here ...
 
 * Currently, we should be aware of the following facts:

@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-05-13T17:43:25+02:00",
+  "id": "iac-exo-opentofu-cloudinit",
+  "duration": 0,
+  "title": "Infrastructure-as-Code (2) - Installing a Microservice Application with OpenTofu",
+  "authors": "Thomas Schuetz",
+  "summary": "Infrastructure-as-Code (2) - Installing a Microservice Application with OpenTofu",
+  "source": "codelabs/iac-exo-opentofu-cloudinit.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "opentofu"
+  ],
+  "tags": [
+    "fhb-vica",
+    "iac"
+  ],
+  "url": "iac-exo-opentofu-cloudinit"
+}
