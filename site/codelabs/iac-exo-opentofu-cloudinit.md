@@ -1,11 +1,12 @@
-summary: Lab 2 - Installing a Microservice Application with OpenTofu (Exoscale Edition)
-  id: iac-opentofu-exo-cloudinit
+summary: Infrastructure-as-Code (2) - Installing a Microservice Application with OpenTofu
+id: iac-exo-opentofu-cloudinit
 categories: opentofu
 tags: fhb-vica, iac
 status: Published
 authors: Thomas Schuetz
 
-# Infrastructure-as-Code (2) - Installing a Microservice Application with OpenTofu (Exoscale Edition)
+# Infrastructure-as-Code (2) - Installing a Microservice Application with OpenTofu
+
 <!-- ------------------------ -->
 
 ## What You’ll Learn
