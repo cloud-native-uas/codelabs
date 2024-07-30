@@ -21,21 +21,47 @@ In this lab, we will:
 * Create a GitLab pipeline for automatic planning and execution
 
 ### Prerequisites
+* Azure account
 * GitLab account
 * OpenTofu installed on your machine
 * Git installed on your machine
 
-## Step 1: Create a Simple Application in an Autoscaled VM
+## Step 1: Verify the Azure Account
+You need to have an Azure Account to follow this lab. If you don't have one yet, you can create one [here](https://azure.microsoft.com/en-us/free/).
+
+On your lab environment, the Azure CLI should be installed. If you are not running this lab from a classroom environment, you can follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
+
+After you have installed the Azure CLI, you can verify the installation by running the following command:
+
+```bash
+az --version
+```
+
+If you see the version of the Azure CLI, you have successfully installed the Azure CLI.
+
+After you have installed the Azure CLI, you can log in to your Azure Account by running the following command:
+
+```bash
+az login --use-device-code
+```
+
+As our lab environment has no browser, we use the device code to authenticate. Therefore, open the URL in your browser and enter the code shown on the screen. After you have successfully authenticated, you should see your subscriptions. Choose the subscription you want to use for this lab.
+
+## Step 2: Create a Simple Application in an Autoscaled VM
 
 ### Create the OpenTofu Configuration
-1. Create a new directory for your OpenTofu configuration.
-2. Create a file named `main.tf` with the following content:
+* Create a new directory for your OpenTofu configuration.
+* Create a file named `provider.tf` with the provider configuration:
 
 ```hcl
 provider "azurerm" {
   features {}
 }
+```
 
+* Afterward, create another file called `network.tf` containing the network configuration:
+
+```
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = "West Europe"
@@ -55,6 +81,11 @@ resource "azurerm_subnet" "internal" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
+```
+
+Furthermore, add a third configuration, that contains the configuration of the virtual machine and storage bucket for this configuration. Let's call this `main.tf`.
+
+```
 resource "azurerm_network_interface" "main" {
   name                = "example-nic"
   location            = azurerm_resource_group.example.location
@@ -128,89 +159,26 @@ resource "azurerm_storage_container" "example" {
     tofu apply
     ```
 
+* Inspect your configuration and afterwards, destroy this configuration again (`tofu destroy`).
+
 ## Step 2: Build a Module for the Application
 
 ### Create the Module
-1. Create a new directory named `modules/application`.
-2. Create a file named `main.tf` in the `modules/application` directory with the following content:
+* Create a new directory in the lab-2 directory, named modules. Furthermore, add another folder named "my-app" in it.
+* Afterward, move all of the previously created files (except the provider.tf) into this new folder.
+* Replace all static configuration in this configuration by variables and create the corresponding variable definitions. as an example, the variable for the storage account name could look like this:
 
 ```hcl
-resource "azurerm_virtual_machine" "main" {
-  name                  = var.vm_name
-  location              = var.location
-  resource_group_name   = var.resource_group_name
-  network_interface_ids = [var.network_interface_id]
-  vm_size               = var.vm_size
-
-  storage_image_reference {
-    publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "22_04-lts"
-    version   = "latest"
-  }
-
-  storage_os_disk {
-    name              = "myosdisk1"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
-
-  os_profile {
-    computer_name  = "hostname"
-    admin_username = var.admin_username
-    admin_password = var.admin_password
-  }
-
-  os_profile_linux_config {
-    disable_password_authentication = false
-  }
-
-  tags = var.tags
+variable "storage_account_name" {
+  type = string
 }
 ```
 
-3. Create a file named `variables.tf` in the `modules/application` directory with the following content:
-
-```hcl
-variable "vm_name" {
-  type = string
-}
-
-variable "location" {
-  type = string
-}
-
-variable "resource_group_name" {
-  type = string
-}
-
-variable "network_interface_id" {
-  type = string
-}
-
-variable "vm_size" {
-  type = string
-}
-
-variable "admin_username" {
-  type = string
-}
-
-variable "admin_password" {
-  type = string
-}
-
-variable "tags" {
-  type = map(string)
-}
-```
-
-4. Update the `main.tf` file in the root directory to use the module:
+* Afterward, create a folder called `terraform` in the lab-2 folder, and add a configuration according to your variables there. This might look as follows:
 
 ```hcl
 module "application" {
-  source              = "./modules/application"
+  source              = "./modules/my-app"
   vm_name             = "example-vm"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -223,6 +191,9 @@ module "application" {
   }
 }
 ```
+
+* Copy the `provider.tf` file into this folder.
+* Then, try this out to check if everything is working as intended
 
 ## Step 3: Store the State in GitLab
 
